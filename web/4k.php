@@ -352,7 +352,7 @@ function get_data($url){
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-		curl_setopt($ch, CURLOPT_REFERER, 'http://www.youtube.com/');
+		curl_setopt($ch, CURLOPT_REFERER, 'https://www.youtube.com/');
 		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.91 Safari/534.30");
 		$f = curl_exec($ch);
 		curl_close($ch);
@@ -366,7 +366,7 @@ function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
 }
 
 function Root_part(){
-$http=isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+$http=isset($_SERVER['HTTPS']) ? 'https://' : 'https://';
 $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
 $domain=$_SERVER['SERVER_NAME'];
  return "$http"."$domain"."$part";
