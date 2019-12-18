@@ -188,7 +188,7 @@ switch (@$_SERVER['PATH_INFO']) {
         $data='';
         $videodata=get_search_video(urlencode($_GET['q']),$key,'video','relevance','tw',$_GET['pid']);
        foreach ($videodata["items"] as $v) {
-            $data.='<a href="'.Root_part().'index.php/watch?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
+            $data.='<a href="'.Root_part().'4k.php/watch?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
         }
         if(!array_key_exists("nextPageToken",$videodata) && array_key_exists("prevPageToken",$videodata)){
             $pid='null';
@@ -205,7 +205,7 @@ switch (@$_SERVER['PATH_INFO']) {
         if(isset($_GET['q'])){
     if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==false ){
      preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['q'], $matches);
-    $str='../index.php/watch?'.$matches[1];
+    $str='../4k.php/watch?'.$matches[1];
      header("Location:$str");
      exit();}}
         echo $header;
@@ -227,7 +227,7 @@ echo '<script>
     var action = \'inactive\';
     function load_country_data(q, pid) {
         $.ajax({
-            url: "../index.php/searchdata",
+            url: "../4k.php/searchdata",
             type: "GET",
             data: "q=" + q + "&pid=" + pid,
             dataType: "json",
@@ -282,7 +282,7 @@ echo '<script>
             <img src="'.Root_part().'1.png" class="logo">
             <div class="wrap">
                 <div class="search">
-                <form action="./index.php/search">
+                <form action="./4k.php/search">
                     <input type="text" name="q" class="searchTerm" style="box-sizing: initial">
                     <button type="submit" class="searchButton"> <i class="fas fa-arrow-right"></i>
                     </form>
@@ -297,7 +297,7 @@ echo '<script>
             
             foreach ($home_data["items"] as $v) {
                 echo '
-                <a href="'.Root_part().'index.php/watch?'. $v["id"].'" >
+                <a href="'.Root_part().'4k.php/watch?'. $v["id"].'" >
                 <div class="Media">
                 
                         <div class="Media-body">
@@ -366,7 +366,7 @@ function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
 }
 
 function Root_part(){
-$http=isset($_SERVER['HTTPS']) ? 'https://' : 'https://';
+$http=isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
 $domain=$_SERVER['SERVER_NAME'];
  return "$http"."$domain"."$part";
